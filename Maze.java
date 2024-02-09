@@ -74,6 +74,7 @@ public class Maze {
 	}
 
 	public boolean loadMaze() {
+		freeAll();
 		boolean ok = false;
 		boolean archivo = false;
 		Scanner sc = new Scanner(System.in);
@@ -186,8 +187,7 @@ public class Maze {
 			System.out.print("Casilla Inicial I: ");
 			int startI = sc.nextInt();
 			System.out.print("Casilla Inicial J: ");
-			String inputSJ = sc2.nextLine();
-			char letraSJ = inputSJ.charAt(0);
+			char letraSJ = sc2.nextLine().charAt(0);
 			if(letraSJ >= 'A' && letraSJ <= 'Z'){
 				letraSJ -= 64;
 			}
@@ -198,8 +198,7 @@ public class Maze {
 			System.out.print("Casilla Final I: ");
 			int endI = sc.nextInt();
 			System.out.print("Casilla Final J: ");
-			String inputEJ = sc2.nextLine();
-			char letraEJ = inputEJ.charAt(0);
+			char letraEJ = sc2.nextLine().charAt(0);
 			if(letraEJ >= 'A' && letraEJ <= 'Z'){
 				letraEJ -= 64;
 			}
@@ -218,5 +217,13 @@ public class Maze {
 				System.out.println("No se ha podido establecer las coordenadas");
 			}
 		}
+	}
+
+	public void freeAll(){
+		setMap(null);
+		setStartI(0);
+		setStartJ(0);
+		setEndJ(0);
+		setEndI(0);
 	}
 }

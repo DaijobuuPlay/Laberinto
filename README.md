@@ -12,3 +12,4 @@ Segunda version del proyecto, añadido:
 - **Carga el contenido del fichero** y guarda el laberinto para dicha sesion
 - Añadido funcion de **mostrar** el laberinto junto a una enumeracion
 - Añadido funcion de **establecer las casillas de Inicio y Final** seleccionando su numero y letra sin ser Case Sensitive.
+- Añadido funcion freeAll() en Maze.java para liberar todos los datos del laberinto cargado

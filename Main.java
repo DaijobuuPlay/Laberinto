@@ -86,6 +86,7 @@ public class Main {
 					break;
 				case 6:
 					session.logout();
+					maze.freeAll();
 					break;
 				default:
 					System.out.println("Seleccione una opcion valida");
