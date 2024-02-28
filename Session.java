@@ -66,7 +66,7 @@ public class Session {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (isUsername == false) {
+		if (!isUsername) {
 			System.out.println("No se ha encontrado este usuario");
 		}
 		return ok;
@@ -99,7 +99,7 @@ public class Session {
 				e.printStackTrace();
 			}
 
-			if (repeat == true) {
+			if (repeat) {
 				System.out.println("Este nombre de usuario esta en uso");
 			} else {
 				System.out.print("Introduzca un nombre: ");
@@ -125,7 +125,7 @@ public class Session {
 				}
 			}
 
-		} while (end == false);
+		} while (!end);
 
 		return ok;
 

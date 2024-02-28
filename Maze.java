@@ -95,7 +95,7 @@ public class Maze {
 			} else {
 				System.out.println("Selecciona un archivo valido");
 			}
-		} while (archivo == false);
+		} while (!archivo);
 		setMap(fileMaze(filename));
 		if (map != null) {
 			ok = true;
@@ -111,25 +111,12 @@ public class Maze {
 		} else {
 			map[startI][startJ] = 'I';
 			map[endI][endJ] = 'F';
-
 			map[0][0] = ' ';
-			for (int i = 1 ; i < map[1].length; i++) {
-				map[0][i] = (char)('A' + (i-1));
-			}
-			for (int i = 1; i < map.length; i++) {
-				map[i][0] = Character.forDigit(i, 10);
-				if(i<10){
-					map[i][1] = ' ';
-				}else{
-					map[i][0] = Character.forDigit(i/10, 10);
-					map[i][1] = Character.forDigit(i%10, 10);
-				}
-			}
-
+			
 			for (int i = 0; i < map.length; i++) {
 				for (int j = 0; j < map[0].length; j++) {
 					System.out.print(map[i][j]);
-					if(j != 0){
+					if (j != 0) {
 						System.out.print(' ');
 					}
 				}
@@ -158,6 +145,30 @@ public class Maze {
 			for (int j = 1; j < i; j++) {
 				laberinto[j+1] = mazeLine[j];
 			}
+			
+			for(int j = 0; j<2; j++) {
+				laberinto[0][j] = ' ';
+				laberinto[1][j] = ' ';
+			}
+			for (int j = 2; j < laberinto[1].length; j++) {
+				laberinto[1][j] = Character.forDigit(j-1, 10);
+				if (j-1 < 10) {
+					laberinto[0][j] = ' ';
+				} else {
+					laberinto[0][j] = Character.forDigit((j-1) / 10, 10);
+					laberinto[1][j] = Character.forDigit((j-1) % 10, 10);
+				}
+			}
+
+			for (int j = 2; j < laberinto.length; j++) {
+				laberinto[j][1] = Character.forDigit(j-1, 10);
+				if (j-1 < 10) {
+					laberinto[j][0] = ' ';
+				} else {
+					laberinto[j][0] = Character.forDigit((j-1) / 10, 10);
+					laberinto[j][1] = Character.forDigit((j-1) % 10, 10);
+				}
+			}
 
 		} catch (IOException e) {
 			System.out.println("No existe el archivo");
@@ -174,52 +185,43 @@ public class Maze {
 		return characters;
 	}
 
-	public void setStartEnd() {
+	public boolean setStartEnd() {
 		if (map == null) {
 			System.out.println("Debe cargar antes un laberinto");
-		} else {
-			if (startI >= 0) {
-				map[startI][startJ] = '#';
-				map[endI][endJ] = '#';
-			}
-			Scanner sc = new Scanner(System.in);
-			Scanner sc2 = new Scanner(System.in);
-			System.out.print("Casilla Inicial I: ");
-			int startI = sc.nextInt();
-			System.out.print("Casilla Inicial J: ");
-			char letraSJ = sc2.nextLine().charAt(0);
-			if(letraSJ >= 'A' && letraSJ <= 'Z'){
-				letraSJ -= 64;
-			}
-			if(letraSJ >= 'a' && letraSJ <= 'z'){
-				letraSJ -= 96;
-			}
-			int startJ = (int)letraSJ;
-			System.out.print("Casilla Final I: ");
-			int endI = sc.nextInt();
-			System.out.print("Casilla Final J: ");
-			char letraEJ = sc2.nextLine().charAt(0);
-			if(letraEJ >= 'A' && letraEJ <= 'Z'){
-				letraEJ -= 64;
-			}
-			if(letraEJ >= 'a' && letraEJ <= 'z'){
-				letraEJ -= 96;
-			}
-			int endJ = (int) letraEJ;
-			if (startI <= map.length && startJ <= map[0].length && endI <= map.length && endJ <= map[0].length) {
-				setStartI(startI);
-				setStartJ(startJ);
-				setEndI(endI);
-				setEndJ(endJ);
-				System.out.println("Coordenadas establecidas correctamente");
-
-			} else {
-				System.out.println("No se ha podido establecer las coordenadas");
-			}
+			return false;
 		}
+		
+		if (startI >= 0) {
+			map[startI][startJ] = '#';
+			map[endI][endJ] = '#';
+		}
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("Casilla Inicial I: ");
+		int startIaux = sc.nextInt();
+		System.out.print("Casilla Inicial J: ");
+		int startJaux = sc.nextInt();
+		
+		System.out.print("Casilla Final I: ");
+		int endIaux = sc.nextInt();
+		System.out.print("Casilla Final J: ");
+		int endJaux = sc.nextInt();
+		if (startIaux <= map.length-2 && startJaux <= map[0].length-2 && endIaux <= map.length-2
+				&& endJaux <= map[0].length-2) {
+			setStartI(startIaux+1);
+			setStartJ(startJaux+1);
+			setEndI(endIaux+1);
+			setEndJ(endJaux+1);
+		}else {
+			return false;
+		}
+
+		return true;
 	}
 
-	public void freeAll(){
+
+	public void freeAll() {
 		setMap(null);
 		setStartI(0);
 		setStartJ(0);
