@@ -31,7 +31,7 @@ public class Session {
 	 * Constructor que inicializa una sesion declarando que no esta iniciada la sesion de usuario
 	 */
 	public Session() {
-		logged = false;
+		logged = true;
 	}
 
 	/**

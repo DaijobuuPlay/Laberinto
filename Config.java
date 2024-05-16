@@ -25,7 +25,12 @@ public class Config {
 	 */
 	static String logged_menu = "\n1. Cargar laberinto\n2. Ver laberinto actual\n3. Establecer casillas de entrada y salida\n4. Buscar caminos\n5. Ver usuario actual\n6. Cerrar sesión\n0. Salir";
 	/**
+	 * Menu para resolver el laberinto
+	 */
+	static String path_finder = "\nSelecciona un camino\n----------------------\n1. El primer camino posible\n2. El camino mas corto\n0. Cancelar";
+	/**
 	 * Mensaje al introducir una opcion incorrecta
 	 */
 	static String option_error = "Introduce una opcion valida";
+
 }
